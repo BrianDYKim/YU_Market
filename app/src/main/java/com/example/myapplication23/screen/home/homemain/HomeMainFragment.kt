@@ -4,13 +4,16 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.view.children
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication23.R
 import com.example.myapplication23.databinding.FragmentHomeMainBinding
 import com.example.myapplication23.model.homelist.TownMarketModel
+import com.example.myapplication23.model.homelist.category.HomeListCategory
 import com.example.myapplication23.screen.base.BaseFragment
 import com.example.myapplication23.screen.home.HomeFragment
-import com.example.myapplication23.screen.home.homelist.HomeCategory
+import com.example.myapplication23.screen.home.InitialViewPagerFragmentObserver
 import com.example.myapplication23.util.LocationData
 import com.example.myapplication23.util.LocationState
 import com.example.myapplication23.util.provider.ResourcesProvider
@@ -46,6 +49,7 @@ class HomeMainFragment
         LocationData.locationStateLiveData.observe(viewLifecycleOwner) {
             // get list after get location
             if (it is LocationState.Success) {
+                initScreen()
                 viewModel.fetchData()
             }
         }
@@ -66,17 +70,24 @@ class HomeMainFragment
         )
     }
 
-    override fun initViews() {
-
-        super.initViews()
+    /**
+     * homeMainFragment의 view를 초기화시키는 method
+     * @author Namjin Jeong
+     * @since 2022/01/13
+     *  * (1차 수정) location이 success로 될 때 view를 초기화하도록 수정
+     *  * @author Doyeop Kim
+     *  * @since 2022/01/17
+     */
+    private fun initScreen() {
 
         // Spinner의 Adapter에 사용할 List
         // 마켓의 업종을 나타내는 String
-        val adapterList = HomeCategory.values().map {
+        val adapterList = HomeListCategory.values().map {
             getString(it.categoryNameId)
         }
 
         with(binding) {
+            initListGridLayout()
 
             // 새로운 할인상품에 사용할 Spinner의 Adapter 설정
             newSaleItemSpinner.adapter = ArrayAdapter(
@@ -91,7 +102,7 @@ class HomeMainFragment
 
             // 근처 마켓 RecyclerView 설정
             nearbyMarketRecyclerView.adapter = nearbyMarketAdapter
-            
+
             // 한줄에 2개씩 띄우도록 설정(spanCount)
             nearbyMarketRecyclerView.layoutManager = GridLayoutManager(
                 requireContext(),
@@ -102,19 +113,57 @@ class HomeMainFragment
 
             // 더보기를 누르면 마켓을 List로 띄워주는 Fragment로 이동
             showMoreTextView.setOnClickListener {
-                showListFragment()
+                showListFragment(HomeListCategory.TOWN_MARKET)
             }
         }
     }
 
     /**
-     * 더보기를 클릭하면 마켓을 RecyclerView로
-     * 띄워주는 Fragment(현재 HomeFragment)를 띄워준다.
-     * MainActivity의 showFragment와 같다.
+     * ListGridLayout을 초기화시키는 method
+     * @author Doyeop Kim
+     * @since 2022/01/17
      */
-    private fun showListFragment() {
+    private fun initListGridLayout() = with(binding) {
+        foodBeverageButton.setOnClickListener {
+            showListFragment(HomeListCategory.FOOD)
+        }
+
+        martButton.setOnClickListener {
+            showListFragment(HomeListCategory.MART)
+        }
+
+        serviceButton.setOnClickListener {
+            showListFragment(HomeListCategory.SERVICE)
+        }
+
+        fashionButton.setOnClickListener {
+            showListFragment(HomeListCategory.FASHION)
+        }
+
+        accessoryButton.setOnClickListener {
+            showListFragment(HomeListCategory.ACCESSORY)
+        }
+
+        etcButton.setOnClickListener {
+            showListFragment(HomeListCategory.ETC)
+        }
+    }
+
+    /**
+     * (1차 수정) showListFragment에 최초에 띄워줄 viewPager의 정보를 같이 실어서 보내준다.
+     * @author Doyeop Kim
+     * @since 2021/01/16 (version 0.3)
+     * * Initial Author : Namjin Jeong
+     * * Initial Since : 2022/01/13
+     * * Initial comment : 동네마켓으로 fragment를 이동시키는 메소드
+     * */
+    private fun showListFragment(homeListCategory: HomeListCategory) {
+        // TODO 메인에서 홈으로 넘어갈 때 프래그먼트를 새로 초기화시키기
+
         val fragmentManager = parentFragmentManager
         val fragmentFound = fragmentManager.findFragmentByTag(HomeFragment.TAG)
+
+        InitialViewPagerFragmentObserver.homeListCategory = homeListCategory
 
         fragmentManager.fragments.forEach {
             fragmentManager.beginTransaction().hide(it).commitAllowingStateLoss()
@@ -172,7 +221,9 @@ class HomeMainFragment
 
     companion object {
         const val TAG = "HomeMainFragment"
+        const val INITIAL_VIEWPAGER_FRAGMENT = "initialViewPagerFragment" // 최초에
 
         fun newInstance() = HomeMainFragment()
     }
+
 }

@@ -11,13 +11,17 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- 2022/01/16 김도엽 수정 : visibility gone -->
         <GridLayout
+            android:id="@+id/listGridLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="3"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="visible">
 
             <LinearLayout
+                android:id="@+id/foodBeverageButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:gravity="center"
@@ -36,6 +40,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/martButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:gravity="center"
@@ -54,6 +59,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/serviceButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:gravity="center"
@@ -72,6 +78,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/fashionButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:gravity="center"
@@ -90,6 +97,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/accessoryButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:gravity="center"
@@ -108,6 +116,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/etcButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:gravity="center"
@@ -127,10 +136,13 @@
 
         </GridLayout>
 
+        <!-- 2022/01/16 김도엽 수정 : visibility gone -->
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/saleProductsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            android:padding="20dp"
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/newSaleItemTextView"
@@ -162,9 +174,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/nearMarketLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            android:padding="20dp"
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/nearbyMarketTextView"

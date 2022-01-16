@@ -6,7 +6,6 @@ import com.example.myapplication23.data.repository.restaurant.DefaultHomeReposit
 import com.example.myapplication23.data.repository.restaurant.HomeRepository
 import com.example.myapplication23.model.homelist.category.HomeListCategory
 import com.example.myapplication23.screen.MainViewModel
-import com.example.myapplication23.screen.home.homelist.HomeCategory
 import com.example.myapplication23.screen.home.homelist.HomeListViewModel
 import com.example.myapplication23.screen.home.HomeViewModel
 import com.example.myapplication23.screen.home.homemain.HomeMainViewModel

@@ -23,18 +23,19 @@ class HomeListViewModel(
     private val homeRepository: HomeRepository
 ) : BaseViewModel() {
     val homeListData = when (homeListCategory) {
-        HomeListCategory.ALL -> MutableLiveData<List<TownMarketModel>>()
+        HomeListCategory.TOWN_MARKET -> MutableLiveData<List<TownMarketModel>>()
         else -> MutableLiveData<List<HomeItemModel>>()
     }
 
     override fun fetchData(): Job = viewModelScope.launch {
         homeListData.value = when (homeListCategory) {
-            HomeListCategory.ALL -> homeRepository.getAllMarketList()
+            HomeListCategory.TOWN_MARKET -> homeRepository.getAllMarketList()
             HomeListCategory.MART -> homeRepository.findItemsByCategory(HomeListCategory.MART)
             HomeListCategory.FOOD -> homeRepository.findItemsByCategory(HomeListCategory.FOOD)
             HomeListCategory.FASHION -> homeRepository.findItemsByCategory(HomeListCategory.FASHION)
             HomeListCategory.ACCESSORY -> homeRepository.findItemsByCategory(HomeListCategory.ACCESSORY)
             HomeListCategory.SERVICE -> homeRepository.findItemsByCategory(HomeListCategory.SERVICE)
+            HomeListCategory.ETC -> homeRepository.findItemsByCategory(HomeListCategory.ETC)
         }
     }
 }

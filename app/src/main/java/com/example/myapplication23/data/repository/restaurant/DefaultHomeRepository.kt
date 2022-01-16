@@ -133,6 +133,8 @@ class DefaultHomeRepository : HomeRepository {
 
             )
 
+            HomeListCategory.ETC -> listOf()
+
             else -> listOf()
         }
     }
@@ -151,25 +153,25 @@ class DefaultHomeRepository : HomeRepository {
 //    override fun getList(homeCategory: HomeCategory): List<MarketModel> {
 ////        val mockList = listOf(
 ////            MarketModel(
-////                1, "all1", HomeCategory.ALL
+////                1, "all1", HomeCategory.TOWN_MARKET
 ////            ),
 ////            MarketModel(
-////                1, "all2", HomeCategory.ALL
+////                1, "all2", HomeCategory.TOWN_MARKET
 ////            ),
 ////            MarketModel(
-////                1, "all3", HomeCategory.ALL
+////                1, "all3", HomeCategory.TOWN_MARKET
 ////            ),
 ////            MarketModel(
-////                1, "all4", HomeCategory.ALL
+////                1, "all4", HomeCategory.TOWN_MARKET
 ////            ),
 ////            MarketModel(
-////                1, "all5", HomeCategory.ALL
+////                1, "all5", HomeCategory.TOWN_MARKET
 ////            ),
 ////            MarketModel(
-////                1, "all6", HomeCategory.ALL
+////                1, "all6", HomeCategory.TOWN_MARKET
 ////            ),
 ////            MarketModel(
-////                1, "all7", HomeCategory.ALL
+////                1, "all7", HomeCategory.TOWN_MARKET
 ////            ),
 ////
 ////

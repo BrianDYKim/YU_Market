@@ -39,7 +39,7 @@ object HomeListViewHolderMapper {
         val inflater = LayoutInflater.from(parent.context)
 
         val viewHolder = when (category) {
-            HomeListCategory.ALL -> TownMarketViewHolder(
+            HomeListCategory.TOWN_MARKET -> TownMarketViewHolder(
                 ViewholderTownMarketBinding.inflate(inflater),
                 viewModel,
                 resourcesProvider
