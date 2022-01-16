@@ -1,6 +1,7 @@
 package com.example.myapplication23.widget.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.myapplication23.model.homelist.HomeListModel
@@ -35,6 +36,8 @@ class HomeModelRecyclerAdapter<M: HomeListModel, VM: BaseViewModel>(
     override fun onBindViewHolder(holder: HomeModelViewHolder<HomeListModel>, position: Int) {
         holder.bindData(modelList[position] as M)
         holder.bindViews(modelList[position] as M, adapterListener)
+
+        Log.d("bindViewHolder", "바인딩")
     }
 
     override fun submitList(list: List<HomeListModel>?) {

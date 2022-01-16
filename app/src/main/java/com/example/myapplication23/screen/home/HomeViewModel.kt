@@ -8,11 +8,10 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel : BaseViewModel() {
 
-    // 현재 homeFragment의 viewPager가 가리키고 있는 페이지 번호
-    val homeCurrentPageData = MutableLiveData<Int>()
+    // 현재 HomeFragment에 띄워지는 chip의 총 갯수
+    var chipQuantity: Int = 0
 
     override fun fetchData(): Job = viewModelScope.launch {
         // TODO get from repository
     }
-
 }

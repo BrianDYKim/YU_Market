@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication23.R
 import com.example.myapplication23.databinding.FragmentHomeBinding
 import com.example.myapplication23.model.homelist.category.HomeListCategory
+import com.example.myapplication23.model.homelist.category.HomeListDetailCategory
 import com.example.myapplication23.screen.base.BaseFragment
 import com.example.myapplication23.screen.home.homelist.HomeListFragment
 import com.example.myapplication23.util.LocationData
@@ -18,8 +19,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class HomeFragment
-    : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
+class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
+
+    private val homeListCategories = HomeListCategory.values()
 
     private lateinit var viewPagerAdapter: HomeListFragmentPagerAdapter
 
@@ -33,11 +35,19 @@ class HomeFragment
         initChipGroup() // ChipGroup의 초기화 작업 진행
     }
 
+    /**
+     * (1차 수정) viewPager의 최초 view 설정 내용 추가
+     * @author Doyeop Kim
+     * @since 2022/01/17
+     */
     override fun observeData() = with(binding) {
         LocationData.locationStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is LocationState.Success -> {
                     initViewPager()
+                    viewPager.post {
+                        viewPager.currentItem = HomeListCategory.values().indexOf(InitialViewPagerFragmentObserver.homeListCategory)
+                    }
                 }
             }
         }
@@ -65,10 +75,10 @@ class HomeFragment
              * viewPager의 변화 감지 -> viewModel에서의 liveData 변화 -> ObserveData를 통해서 chipGroup의 구성을 변화시킨다.
              * @author Doyeop Kim
              */
-            viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+            viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     Log.d("listener", viewPager.currentItem.toString())
-                    viewModel.homeCurrentPageData.value = viewPager.currentItem
+                    changeChipGroup(homeListCategories[viewPager.currentItem])
                 }
             })
 
@@ -92,7 +102,7 @@ class HomeFragment
      * @since 2022/01/12
      */
     private fun initChipGroup() {
-        changeChipGroup(HomeListCategory.ALL)
+        changeChipGroup(HomeListCategory.TOWN_MARKET)
     }
 
     /**
@@ -103,29 +113,61 @@ class HomeFragment
      */
     private fun changeChipGroup(homeListCategory: HomeListCategory) = with(binding.orderChipGroup) {
 
-        val homeListDetailCategories = HomeListDetailCategoryMapper.findDetailCategoriesByCategory(homeListCategory)
+        val homeListDetailCategories =
+            HomeListDetailCategoryMapper.findDetailCategoriesByCategory(homeListCategory)
         val categoryQuantity = homeListDetailCategories.size
+
+        // 칩의 개수를 동적으로 할당하여 관리한다.
+        if (viewModel.chipQuantity < categoryQuantity) {
+            for (i in 1..(categoryQuantity - viewModel.chipQuantity)) {
+                val chip = layoutInflater.inflate(R.layout.home_chip, this, false) as Chip
+                addView(chip)
+            }
+            viewModel.chipQuantity = categoryQuantity
+        }
 
         children.forEachIndexed { index, view ->
 
-            if(view is Chip) {
+            if (view is Chip) {
 
-                when(index) {
-                    0 -> {
-
-                    }
-
-                    in 1..categoryQuantity -> {
-
-                    }
-
-                    else -> {
-
-                    }
-
+                when (index) {
+                    0 -> changeChip(
+                        view,
+                        homeListDetailCategories[index],
+                        isVisible = true,
+                        isChecked = true
+                    )
+                    in 1 until categoryQuantity -> changeChip(
+                        view,
+                        homeListDetailCategories[index],
+                        isVisible = true,
+                        isChecked = false
+                    )
+                    else -> changeChip(view, null, isVisible = false, isChecked = false)
                 }
             }
         }
+    }
+
+    /**
+     * 칩의 구성을 변환시키는 메소드
+     * @author Doyeop Kim
+     * @since 2022/01/13
+     * @param chip: chip view
+     * @param content: chip의 text에 들어가야할 내용물
+     * @param isVisible: chip이 보여지는지 여부를 결정하는 파라미터. default value는 true로 설정이 되어있다.
+     * @param isChecked: 현재 chip이 체크가 되어있는 상황인지를 담아둔 boolean type의 변수. default value는 false로 설정이 되어있다.
+     */
+    private fun changeChip(
+        chip: Chip, homeListDetailCategory: HomeListDetailCategory?, isVisible: Boolean = true,
+        isChecked: Boolean = false
+    ) {
+        // TODO click에 대한 반응 구현
+        homeListDetailCategory?.let {
+            chip.text = getString(homeListDetailCategory.detailCategoryNameId)
+        }
+        chip.isVisible = isVisible
+        chip.isChecked = isChecked
     }
 
     companion object {

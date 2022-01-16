@@ -36,7 +36,6 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="12dp"
             android:visibility="gone"
-            app:checkedChip="@id/chipDefault"
             app:chipSpacingHorizontal="4dp"
             app:chipSpacingVertical="6dp"
             app:layout_constraintBottom_toTopOf="@id/viewPager"
@@ -44,42 +43,6 @@
             app:singleLine="true"
             app:singleSelection="true"
             tools:visibility="visible">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipInitialize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="initialize"
-                android:visibility="gone"
-                app:chipIconEnabled="true"
-                tools:visibility="visible" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipFastDelivery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="fast_delivery"
-                app:chipIconEnabled="true" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipDeliveryTip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="low_delivery_tip"
-                app:chipIconEnabled="true" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipDefault"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="default_order" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipTopRate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="top_rate"
-                app:chipIconEnabled="true" />
 
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>

@@ -14,6 +14,18 @@
     <string name="home_detail_beverage_coffee_and_milk_product">음료/커피/유제품</string>
     <string name="home_detail_instant_cook">즉석조리식품</string>
     <string name="home_detail_washing_products">세탁용품</string>
+    <string name="home_detail_hair_shop">헤어샵/미용실</string>
+    <string name="home_detail_massage_and_skin_care">마사지/피부관리</string>
+    <string name="home_detail_study_cafe">스터디카페</string>
+    <string name="home_detail_woman_top">여성상의</string>
+    <string name="home_detail_woman_pants">여성하의</string>
+    <string name="home_detail_man_top">남성상의</string>
+    <string name="home_detail_man_pants">남성하의</string>
+    <string name="home_detail_shoes">신발</string>
+    <string name="home_detail_man_bag">남성가방</string>
+    <string name="home_detail_woman_bag">여성가방</string>
+    <string name="home_detail_earrings">귀걸이</string>
+    <string name="home_detail_etc_all">전체</string>
 
     <!-- 검색 쿼리에 사용될 세부 카테고리 string -->
     <string name="home_detail_all_type">ALL</string>
@@ -29,5 +41,17 @@
     <string name="home_detail_beverage_coffee_and_milk_product_type">BEVERAGE_COFFEE_MILK_PRODUCT</string>
     <string name="home_detail_instant_cook_type">INSTANT_COOK</string>
     <string name="home_detail_washing_products_type">WASHING_PRODUCT</string>
+    <string name="home_detail_hair_shop_type">HAIR_SHOP</string>
+    <string name="home_detail_massage_and_skin_care_type">MASSAGE_AND_SKIN_CARE</string>
+    <string name="home_detail_study_cafe_type">STUDY_CAFE</string>
+    <string name="home_detail_man_top_type">MAN_TOP</string>
+    <string name="home_detail_man_pants_type">MAN_PANTS</string>
+    <string name="home_detail_woman_top_type">WOMAN_TOP</string>
+    <string name="home_detail_woman_pants_type">WOMAN_PANTS</string>
+    <string name="home_detail_shoes_type">SHOES</string>
+    <string name="home_detail_man_bag_type">MAN_BAG</string>
+    <string name="home_detail_woman_bag_type">WOMAN_BAG</string>
+    <string name="home_detail_earrings_type">EARRINGS</string>
+    <style name="home_detail_etc_all_type">ETC_ALL</style>
 
 </resources>

@@ -20,7 +20,7 @@ data class TownMarketModel(
     val locationLatLngEntity: LocationLatLngEntity,
     val marketImageUrl: String,
     override val type: CellType = CellType.HOME_CELL,
-    override val homeListCategory: HomeListCategory = HomeListCategory.ALL
+    override val homeListCategory: HomeListCategory = HomeListCategory.TOWN_MARKET
 ): HomeListModel(id, type, homeListCategory) {
 
 }

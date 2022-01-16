@@ -40,7 +40,7 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
         HomeModelRecyclerAdapter<HomeListModel, HomeListViewModel>(
             listOf(), viewModel, resourcesProvider,
             adapterListener = when (homeListCategory) {
-                HomeListCategory.ALL -> {
+                HomeListCategory.TOWN_MARKET -> {
                     object : TownMarketListener {
                         override fun onClickItem(townMarketModel: TownMarketModel) = Unit
                     }
@@ -71,7 +71,6 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
     override fun initViews() = with(binding) {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this@HomeListFragment.context)
-
     }
 
     override fun observeData() = with(viewModel) {
